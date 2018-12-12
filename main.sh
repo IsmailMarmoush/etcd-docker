@@ -2,7 +2,11 @@
 host=http://localhost:32770/v2
 
 put(){
-	curl $host/keys"$1" -XPUT -d value="$2" | jq
+  IN=$1
+  arr=(${IN//=/ })
+  k=${arr[0]}
+  v=${arr[1]}
+	curl $host/keys"$k" -XPUT -d value="$v" | jq
 }
 
 
