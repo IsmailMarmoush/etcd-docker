@@ -9,7 +9,6 @@ put(){
 	curl $host/keys"$k" -XPUT -d value="$v" | jq
 }
 
-
 get(){
 	curl $host/keys$1 | jq
 }
