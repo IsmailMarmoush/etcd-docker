@@ -10,7 +10,7 @@ put(){
 }
 
 get(){
-	curl $host/keys$1 | jq
+	curl $host/keys$1?recursive=true | jq
 }
 
 delete(){

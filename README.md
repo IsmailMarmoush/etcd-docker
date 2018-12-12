@@ -6,7 +6,7 @@
 - Docker Compose v1.23.1+
 
 
-### Usage
+### Docker Usage
 
     $ docker-compose up -d
 
@@ -14,6 +14,20 @@
 
     $ docker exec -it etcd1 etcdctl get /secret
 
+
+### REST Request usage
+```bash
+
+./main.sh put_dir "/myapplication"
+./main.sh put_dir "/myapplication/service1"
+./main.sh put_dir "/myapplication/service2"
+
+./main.sh put "/myapplication/service1/mykey1=value1"
+./main.sh put "/myapplication/service2/mykey2=value2"
+
+./main.sh get
+
+```
 
 ### Docker Images
 
