@@ -1,30 +1,30 @@
 #!/bin/bash
-host=http://localhost:9001/v2
+host=http://localhost:9001/v3/
 
 put() {
   k=$1
   v=$2
-  curl $host/keys/"$k" -XPUT -d value="$v" | jq
+  curl $host/"$k" -XPUT -d value="$v" | jq
 }
 
 get() {
-  curl $host/keys$1?recursive=true | jq
+  curl $host/"$1"?recursive=true | jq
 }
 
 delete() {
-  curl "$host/keys"$1"?recursive=true" -XDELETE | jq
+  curl $host/"$1"?recursive=true -XDELETE | jq
 }
 
 put_dir() {
-  curl $host/keys"$1" -XPUT -d dir=true | jq
+  curl $host/"$1" -XPUT -d dir=true | jq
 }
 
 get_dir() {
-  curl $host/keys"$1"?recursive=true | jq
+  curl $host/"$1"?recursive=true | jq
 }
 
 delete_dir() {
-  curl "$host/keys"$1"?dir=true&recursive=true" -XDELETE | jq
+  curl $host/"$1"?dir=true&recursive=true -XDELETE | jq
 }
 
 $@
