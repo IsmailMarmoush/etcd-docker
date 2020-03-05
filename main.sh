@@ -1,5 +1,9 @@
 #!/bin/bash
-host=http://localhost:9001/v3/
+host=http://localhost:9001
+
+version() {
+  curl $host/version
+}
 
 put() {
   k=$1
@@ -24,7 +28,8 @@ get_dir() {
 }
 
 delete_dir() {
-  curl $host/"$1"?dir=true&recursive=true -XDELETE | jq
+  curl $host/"$1"?dir=true &
+  recursive=true -XDELETE | jq
 }
 
 $@
