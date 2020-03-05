@@ -2,34 +2,19 @@
 host=http://localhost:9001
 
 version() {
-  curl $host/version
+  curl --silent $host/version | jq
 }
 
 put() {
-  k=$1
-  v=$2
-  curl $host/"$k" -XPUT -d value="$v" | jq
+  k=$(echo $1 | base64)
+  v=$(echo $2 | base64)
+  curl --silent -L $host/v3/kv/put -X POST -d "{\"key\": \"${k}\", \"value\": \"${v}\" }" | jq
 }
 
 get() {
-  curl $host/"$1"?recursive=true | jq
-}
-
-delete() {
-  curl $host/"$1"?recursive=true -XDELETE | jq
-}
-
-put_dir() {
-  curl $host/"$1" -XPUT -d dir=true | jq
-}
-
-get_dir() {
-  curl $host/"$1"?recursive=true | jq
-}
-
-delete_dir() {
-  curl $host/"$1"?dir=true &
-  recursive=true -XDELETE | jq
+  key=$(echo $1 | base64)
+  value=$(curl --silent -L http://localhost:9001/v3/kv/range -X POST -d "{\"key\": \"${key}\"}" | jq .kvs[0].value)
+  echo "${value//\"}" | base64 --decode
 }
 
 $@
