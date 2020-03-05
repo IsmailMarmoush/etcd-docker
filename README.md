@@ -22,8 +22,8 @@
 ./main.sh put_dir "/myapplication/service1"
 ./main.sh put_dir "/myapplication/service2"
 
-./main.sh put "/myapplication/service1/mykey1=value1"
-./main.sh put "/myapplication/service2/mykey2=value2"
+./main.sh put "/myapplication/service1/mykey1" value1
+./main.sh put "/myapplication/service2/mykey2" value2
 
 ./main.sh get
 
